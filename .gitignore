@@ -149,6 +149,6 @@ dmypy.json
 static/
 marketplace/static/
 media/
-
+products/fixtures
 
 
