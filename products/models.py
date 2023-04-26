@@ -22,11 +22,23 @@ class Product(models.Model):
         return f'Товар: {self.name} <> Категория {self.category.name}'
 
 
+class ShoppingCartQuerySet(models.QuerySet):
+    def total_sum(self):
+        return sum(shopping_cart.sum() for shopping_cart in self)
+
+    def total_quantity(self):
+        return sum(shopping_cart.quantity for shopping_cart in self)
+
+
 class ShoppingCart(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(default=0)
     create_timestamp = models.DateTimeField(auto_now_add=True)
+    objects = ShoppingCartQuerySet.as_manager()
 
     def __str__(self):
         return f'Корзина для: {self.user.username} <> Продукт: {self.product.name}'
+
+    def sum(self):
+        return self.quantity * self.product.price

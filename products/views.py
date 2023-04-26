@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from products.models import Product, ProductCategory, ShoppingCart
 from users.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -19,6 +20,8 @@ def products(request):
     }
     return render(request, 'products/products.html', context)
 
+
+@login_required
 def shopping_cart_add(request, product_id):
     product = Product.objects.get(id=product_id)
     shopping_carts = ShoppingCart.objects.filter(user=request.user,
@@ -33,6 +36,8 @@ def shopping_cart_add(request, product_id):
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+
+@login_required
 def shopping_cart_remove(request, shopping_cart_id):
     shopping_cart = ShoppingCart.objects.get(id=shopping_cart_id)
     shopping_cart.delete()
