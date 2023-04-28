@@ -22,6 +22,7 @@ def products(request, category_id=None, page_number=1):
         'title': 'TOPS_CROPS - Каталог',
         'categories': ProductCategory.objects.all(),
         'products': products_paginator,
+        'category_id': category_id,
     }
     return render(request, 'products/products.html', context)
 

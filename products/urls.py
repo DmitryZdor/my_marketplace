@@ -11,5 +11,6 @@ urlpatterns = [
          shopping_cart_add, name='shopping_cart_add'),
     path('shopping_carts/remove/<int:shopping_cart_id>/',
          shopping_cart_remove, name='shopping_cart_remove'),
+    path('category/<int:category_id>/<int:page_number>/', products, name='paginator_category'),
 ]
 
