@@ -18,7 +18,7 @@
             <h1 class="my-4">TOPS_CROPS</h1>
             <div class="list-group">
                 {% for category in categories %}
-                    <a href="{% url 'products:category' category.id %}" class="list-group-item">
+                    <a href="{% url 'products:paginatorcategory' category_id=category.id page_number=1 %}" class="list-group-item">
                         {{category.name}}
                     </a>
                 {% endfor %}
@@ -87,9 +87,8 @@
                     <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
                         <a class="page-link"
                            href="{% if products.has_previous %}
-                           {% if category_id %} {% url 'products:paginator_category' category_id products.previous_page_number %}
-                           {% else %} {% url 'products:paginator' products.previous_page_number %}
-                           {% endif %} {% endif %}"
+                           {% url 'products:paginatorcategory' category_id products.previous_page_number %}
+                           {% endif %}"
                            tabindex="-1" aria-disabled="true">
                             Предыдущая
                         </a>
@@ -97,9 +96,7 @@
                     {% for page in products.paginator.page_range %}
                         <li class="page-item">
                             <a class="page-link" href="
-                            {% if category_id %} {% url 'products:paginator_category' category_id page %}
-                            {% else %} {% url 'products:paginator' page %}
-                            {% endif %}">
+                            {% url 'products:paginatorcategory' category_id page %}">
                                 {{ page }}
                             </a>
                         </li>
@@ -107,9 +104,8 @@
                     <li class="page-item {% if not products.has_next %} disabled {% endif %}">
                         <a class="page-link"
                            href="{% if products.has_next %}
-                           {% if category_id %} {% url 'products:paginator_category' category_id products.next_page_number %}
-                           {% else %} {% url 'products:paginator' products.next_page_number %}
-                           {% endif %} {% endif %}">
+                            {% url 'products:paginatorcategory' category_id products.next_page_number %}
+                            {% endif %}">
                             Следующая
                         </a>
                     </li>
@@ -128,7 +124,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Store 2022</p>
+        <p class="m-0 text-center text-white">Copyright &copy; TOPS_CROPS 2023</p>
     </div>
     <!-- /.container -->
 </footer>
