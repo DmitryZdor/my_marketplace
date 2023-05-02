@@ -3,28 +3,36 @@ from django.shortcuts import render, HttpResponseRedirect
 from products.models import Product, ProductCategory, ShoppingCart
 from users.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
 
 
-def index(request):
-    context = {
-        'title': 'TOPS_CROPS',
+class IndexView(TemplateView):
+    template_name = 'products/index.html'
 
-    }
-    return render(request, 'products/index.html', context)
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data()
+        context['title'] = 'TOPS_CROPS'
+        return context
 
 
-def products(request, category_id=0, page_number=1):
-    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
-    per_page = 3
-    paginator = Paginator(products, per_page)
-    products_paginator = paginator.page(page_number)
-    context = {
-        'title': 'TOPS_CROPS - Каталог',
-        'categories': ProductCategory.objects.all(),
-        'products': products_paginator,
-        'category_id': category_id,
-    }
-    return render(request, 'products/products.html', context)
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'products/products.html'
+    paginate_by = 3
+
+    def get_queryset(self):
+        queryset = super(ProductsListView, self).get_queryset()
+        category_id = self.kwargs.get('category_id')
+        return queryset.filter(category_id=category_id) if category_id else queryset
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data()
+        context['title'] = 'TOPS_CROPS - Каталог'
+        context['categories'] = ProductCategory.objects.all()
+        return context
+
 
 
 @login_required

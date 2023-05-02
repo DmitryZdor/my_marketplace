@@ -9,6 +9,11 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'категория товаров'
+        verbose_name_plural = 'Категории товаров'
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
@@ -17,6 +22,10 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
     category = models.ForeignKey(to=ProductCategory, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name='Товар'
+        verbose_name_plural = 'Товары'
 
     def __str__(self):
         return f'Товар: {self.name} <> Категория {self.category.name}'
