@@ -1,4 +1,5 @@
 from django.db import models
+
 from users.models import User
 
 
@@ -14,7 +15,6 @@ class ProductCategory(models.Model):
         verbose_name_plural = 'Категории товаров'
 
 
-
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
     description = models.TextField(null=True, blank=True, verbose_name='Описание')
@@ -24,7 +24,7 @@ class Product(models.Model):
     category = models.ForeignKey(to=ProductCategory, on_delete=models.PROTECT)
 
     class Meta:
-        verbose_name='Товар'
+        verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
 
     def __str__(self):

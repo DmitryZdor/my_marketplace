@@ -1,15 +1,13 @@
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import HttpResponseRedirect
-from users.models import User, EmailVerification
-from users.forms import (UserLoginForm, UserRegistrationForm,
-                         UserProfileForm)
-from products.models import ShoppingCart
+from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
-from django.contrib.auth.views import LoginView
-from django.urls import reverse, reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
-from common.views import TitleMixin
 
+from common.views import TitleMixin
+from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
+from users.models import EmailVerification, User
 
 
 class UserLoginView(TitleMixin, LoginView):

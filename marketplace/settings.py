@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
-import environ
 from pathlib import Path
+
+# import os
+import environ
 
 env = environ.Env(
     # set casting, default value
@@ -19,8 +20,6 @@ env = environ.Env(
 )
 # reading .env file
 environ.Env.read_env(env_file='infra/.env')
-
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
