@@ -36,7 +36,7 @@ class UserRegistrationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Подтверждение пароля'}))
-    birthday = forms.DateField(required=True,
+    birthday = forms.DateField(required=False,
                                widget=forms.DateInput(attrs={
                                    'class': 'form-control py-4',
                                    'placeholder': 'Введите дату рождения',
