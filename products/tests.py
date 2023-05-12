@@ -2,7 +2,9 @@ from http import HTTPStatus
 
 from django.test import TestCase
 from django.urls import reverse
+
 from products.models import Product, ProductCategory
+
 
 class IndexViewTestCase(TestCase):
 
@@ -20,7 +22,6 @@ class ProductsViewTestCase(TestCase):
 
     def setUp(self):
         self.products = Product.objects.all()
-
 
     def test_list(self):
         path = reverse('products:main')

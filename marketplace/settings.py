@@ -174,7 +174,7 @@ LOGOUT_REDIRECT_URL = '/'
 # EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#OAuth
+# OAuth
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
