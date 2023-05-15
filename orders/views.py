@@ -1,7 +1,8 @@
-from django.views.generic.edit import CreateView
-from orders.forms import OrderForm
 from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+
 from common.views import TitleMixin
+from orders.forms import OrderForm
 
 
 class OrderCreateView(TitleMixin, CreateView):
