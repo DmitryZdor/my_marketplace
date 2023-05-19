@@ -2,11 +2,13 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
-
+from django.core.mail import send_mail
 from common.views import TitleMixin
+from marketplace import settings
 from orders.forms import OrderForm
 from orders.models import Order
 from products.models import ShoppingCart
+from users.tasks import send_email_client_order
 
 
 class SuccessTemplateView(TitleMixin, TemplateView):
@@ -55,4 +57,5 @@ class OrderCreateView(TitleMixin, CreateView):
         form.instance.initiator = self.request.user
         self.object.save()
         self.shopping_carts.delete()
+        send_email_client_order(self.object)
         return super(OrderCreateView, self).form_valid(form)

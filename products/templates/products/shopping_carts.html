@@ -15,7 +15,7 @@
                 <div class="row text-center">
                     <div class="col-lg-4">
                         <input name="basketID" type="number" class="form-control"
-                               value="{{ shopping_cart.quantity }}" min="0">
+                               value="{{ shopping_cart.quantity }}" min="{{ shopping_cart.quantity }}" max="{{ shopping_cart.quantity }}">
                     </div>
                     <div class="col-lg-4">{{ shopping_cart.sum|intcomma }} руб.</div>
                     <div class="col-lg-4">

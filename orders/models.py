@@ -18,7 +18,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     email = models.EmailField(max_length=255)
-    phone = models.CharField(max_length=16)
+    phone = models.CharField(max_length=20)
     address = models.CharField(max_length=255)
     shopping_cart_history = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
