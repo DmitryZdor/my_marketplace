@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
@@ -18,7 +18,7 @@ class OrderDetailView(DetailView):
     template_name = 'orders/order.html'
     model = Order
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super(OrderDetailView, self).get_context_data(**kwargs)
         context['title'] = f'TOPS_CROPS - Заказ #{self.object.id}'
         return context
