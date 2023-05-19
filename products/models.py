@@ -52,3 +52,12 @@ class ShoppingCart(models.Model):
 
     def sum(self):
         return self.quantity * self.product.price
+
+    def de_json(self):
+        shopping_cart_item = {
+            'product_name': self.product.name,
+            'quantity': self.quantity,
+            'price': float(self.product.price),
+            'sum': float(self.sum()),
+        }
+        return shopping_cart_item

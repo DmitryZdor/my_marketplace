@@ -1,17 +1,18 @@
 from django.db import models
 
 from users.models import User
+from products.models import ShoppingCart
 
 
 class Order(models.Model):
     CREATED = 0
-    PAID = 1
-    ON_WAY = 2
+    WAIT_FOR_PAY = 1
+    PAID = 2
     DELIVERED = 3
     STATUSES = (
         (CREATED, 'Создан'),
+        (WAIT_FOR_PAY, 'Ожидает оплаты'),
         (PAID, 'Оплачен'),
-        (ON_WAY, 'В пути'),
         (DELIVERED, 'Доставлен'),
     )
 
@@ -27,3 +28,4 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order # {self.id}. {self.first_name} {self.last_name}'
+
